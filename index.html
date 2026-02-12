@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Question for You ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffebee; /* Soft pink background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+        }
+
+        h1 {
+            color: #d32f2f; /* Deep red */
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            position: relative; /* Needed for button positioning context */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn {
+            background-color: #4CAF50; /* Green for Yes */
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        #noBtn {
+            background-color: #ef5350; /* Red for No */
+            color: white;
+            position: relative; /* Allows us to move it easily */
+        }
+
+        /* Success Message (Hidden by default) */
+        #success-message {
+            display: none;
+            text-align: center;
+            color: #d32f2f;
+        }
+
+        #success-message img {
+            max-width: 300px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-container">
+        <h1>Will you be my Valentine? 🌹</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes! 😍</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <div id="success-message">
+        <h1>Yay! I knew you'd say yes! ❤️</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3hweXU2OGZ5bTh2YmF4Z2Zpbmh6bTh2YmF4Z2Zpbmh6bTh2YmF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0ThflsHCqDrG/giphy.gif" alt="Happy Cat">
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionContainer = document.getElementById('question-container');
+        const successMessage = document.getElementById('success-message');
+
+        // Logic for the "No" button running away
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton); // For mobile phones
+
+        function moveButton() {
+            // Get the window dimensions
+            const maxWidth = window.innerWidth - noBtn.offsetWidth;
+            const maxHeight = window.innerHeight - noBtn.offsetHeight;
+
+            // Calculate a random position
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+
+            // Apply new position (using fixed so it moves relative to the screen)
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Logic for the "Yes" button
+        yesBtn.addEventListener('click', () => {
+            questionContainer.style.display = 'none'; // Hide the question
+            successMessage.style.display = 'block';   // Show the celebration
+            
+            // Optional: Add confetti effect here if you wanted to get fancy!
+        });
+    </script>
+</body>
+</html>
